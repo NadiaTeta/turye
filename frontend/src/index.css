@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f6f1e4;
+  --color-cream-deep: #efe8d8;
+  --color-card: #e9e2d2;
+  --color-card-line: rgba(27, 67, 50, 0.1);
+  --color-ink: #1b2a20;
+  --color-green: #1b4332;
+  --color-green-deep: #123024;
+  --color-gold: #e8a23a;
+  --color-gold-deep: #c97f1e;
+  --color-muted: #7c7364;
+
+  --font-display: "Sora", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* plate visual — layered gradient blobs stand in for a food photo */
+.plate {
+  box-shadow:
+    0 8px 18px rgba(27, 42, 32, 0.12),
+    inset 0 0 0 6px rgba(255, 255, 255, 0.6);
+}
+.plate .blob {
+  position: absolute;
+  border-radius: 44% 56% 60% 40% / 50% 45% 55% 50%;
+  opacity: 0.92;
+}
+.plate .blob:nth-child(1) {
+  width: 74%;
+  height: 70%;
+  top: 14%;
+  left: 13%;
+  background: var(--b1);
+}
+.plate .blob:nth-child(2) {
+  width: 46%;
+  height: 42%;
+  top: 10%;
+  left: 44%;
+  background: var(--b2);
+  border-radius: 60% 40% 45% 55% / 55% 60% 40% 45%;
+}
+.plate .blob:nth-child(3) {
+  width: 36%;
+  height: 34%;
+  top: 48%;
+  left: 16%;
+  background: var(--b3);
+  border-radius: 50% 50% 40% 60% / 45% 55% 45% 55%;
+}
+.plate .blob:nth-child(4) {
+  width: 30%;
+  height: 28%;
+  top: 52%;
+  left: 56%;
+  background: var(--b4);
+  border-radius: 55% 45% 55% 45% / 50% 50% 50% 50%;
+}
+
+/* hero — slow zoom on the photo, text rises in one line after another */
+@keyframes hero-zoom {
+  from { transform: scale(1.12); }
+  to { transform: scale(1); }
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-photo {
+  animation: hero-zoom 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.rise {
+  animation: rise-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--delay, 0s);
+}
+
+/* sections fade up when they scroll into view (see Reveal.tsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* burger photo that grows and tilts on scroll / cursor (see BurgerStack.tsx) */
+.burger-stage {
+  --open: 0;
+  --mx: 0;
+  --my: 0;
+}
+@keyframes burger-bob {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(6px); }
+}
+.burger {
+  position: relative;
+  width: min(86vw, 440px);
+  aspect-ratio: 329 / 309;
+  transform:
+    perspective(900px)
+    rotateX(calc(var(--my) * -10deg))
+    rotateY(calc(var(--mx) * 14deg))
+    scale(calc(0.82 + var(--open) * 0.22));
+}
+.burger-float {
+  width: 100%;
+  height: 100%;
+  animation: burger-bob 5s ease-in-out infinite;
+}
+.burger-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  border-radius: 32px;
+  box-shadow: 0 30px 60px -20px rgba(27, 42, 32, 0.45);
+  filter: saturate(calc(1 + var(--open) * 0.15)) brightness(calc(0.9 + var(--open) * 0.12));
+}
+.burger-glow {
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(232, 162, 58, 0.45), transparent);
+  filter: blur(40px);
+  opacity: calc(0.3 + var(--open) * 0.7);
+  transform: translate(calc(var(--mx) * -20px), calc(var(--my) * -20px));
+}
+.burger-label {
+  display: none;
+  position: absolute;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-green-deep);
+  background: #fff;
+  border: 1px solid rgba(232, 162, 58, 0.6);
+  box-shadow: 0 6px 16px rgba(27, 42, 32, 0.12);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  opacity: clamp(0, calc((var(--open) - var(--at)) * 6), 1);
+}
+.burger-label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 36px;
+  border-top: 2px solid var(--color-gold);
+}
+.burger-label::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-gold);
+}
+/* labels slide out from the burger toward their side */
+.burger-label-right {
+  left: 88%;
+  transform: translate(calc(clamp(0, calc((var(--open) - var(--at)) * 6), 1) * 28px), -50%);
+}
+.burger-label-right::before { right: 100%; }
+.burger-label-right::after { right: calc(100% + 32px); }
+.burger-label-left {
+  right: 88%;
+  transform: translate(calc(clamp(0, calc((var(--open) - var(--at)) * 6), 1) * -28px), -50%);
+}
+.burger-label-left::before { left: 100%; }
+.burger-label-left::after { left: calc(100% + 32px); }
+@media (min-width: 768px) {
+  .burger-label {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,116 @@
+import type { Category, Dish } from "../types";
+
+// Dish photos in public/images/dishes are TEMPORARY stock photos (from
+// Unsplash, free to use). Replace them with photos of your own dishes, keeping
+// the same file names, or change the image paths below. Remove a dish's
+// image line to fall back to the drawn plate.
+
+// Menu sections. Counts on the filter buttons are worked out from the dishes
+// below, and a section with no dishes is hidden until you add some.
+export const categories: Category[] = [
+  { id: "breakfast", label: "Breakfast" },
+  { id: "lunch", label: "Lunch" },
+  { id: "dinner", label: "Dinner" },
+  { id: "drinks", label: "Drinks" },
+  { id: "snacks", label: "Snacks" },
+];
+
+export const dishes: Dish[] = [
+  {
+    id: "pumpkin-cutlets",
+    name: "Pumpkin Cutlets",
+    price: 8.5,
+    weight: "485 g",
+    kcal: "425 kcal",
+    tag: "gluten free",
+    category: "dinner",
+    blobs: ["#E4A63B", "#A3B86C", "#E8C07D", "#6F8F4E"],
+    image: "/images/dishes/pumpkin-cutlets.webp",
+    imageAlt: "Golden cutlets served on fresh greens",
+  },
+  {
+    id: "spicy-red-fish-salad",
+    name: "Spicy Red Fish Salad",
+    price: 14.0,
+    weight: "460 g",
+    kcal: "510 kcal",
+    tag: "spicy",
+    category: "lunch",
+    desc: "Savor the fiery delight of our Spicy Red Fish Salad, featuring succulent red fish marinated with zesty spices and fresh lemon.",
+    blobs: ["#C4472E", "#E3B23C", "#7C8F4A", "#D9713F"],
+    image: "/images/dishes/spicy-red-fish-salad.webp",
+    imageAlt: "Seared red fish fillet over dressed greens",
+  },
+  {
+    id: "harvest-bowl",
+    name: "Harvest Bowl",
+    price: 13.0,
+    weight: "485 g",
+    kcal: "425 kcal",
+    tag: "spicy",
+    category: "dinner",
+    blobs: ["#7C8F4A", "#D9A441", "#B85C38", "#8FA84E"],
+    image: "/images/dishes/harvest-bowl.webp",
+    imageAlt: "Bowl of avocado, chickpeas, roasted squash and fresh vegetables",
+  },
+  {
+    id: "crisp-veggie",
+    name: "Crisp Veggie",
+    price: 11.5,
+    weight: "485 g",
+    kcal: "425 kcal",
+    tag: "gluten free",
+    category: "snacks",
+    blobs: ["#8FA84E", "#C4472E", "#E3B23C", "#5D7A3C"],
+    image: "/images/dishes/crisp-veggie.webp",
+    imageAlt: "Dark bowl of crisp mixed vegetables",
+  },
+  {
+    id: "citrus-kale-toss",
+    name: "Citrus Kale Toss",
+    price: 9.2,
+    weight: "410 g",
+    kcal: "360 kcal",
+    tag: "vegan",
+    category: "lunch",
+    blobs: ["#6F8F4E", "#E4A63B", "#A3B86C", "#D9713F"],
+    image: "/images/dishes/citrus-kale-toss.webp",
+    imageAlt: "Kale salad tossed with a light dressing",
+  },
+  {
+    id: "greek-garden-plate",
+    name: "Greek Garden Plate",
+    price: 10.75,
+    weight: "440 g",
+    kcal: "390 kcal",
+    tag: "gluten free",
+    category: "lunch",
+    blobs: ["#B85C38", "#8FA84E", "#E3B23C", "#7C8F4A"],
+    image: "/images/dishes/greek-garden-plate.webp",
+    imageAlt: "Plate of fresh salad with tomatoes and greens",
+  },
+  {
+    id: "herb-chicken-salad",
+    name: "Herb Chicken Salad",
+    price: 12.4,
+    weight: "470 g",
+    kcal: "480 kcal",
+    tag: "high protein",
+    category: "lunch",
+    blobs: ["#D9A441", "#7C8F4A", "#C4472E", "#A3B86C"],
+    image: "/images/dishes/herb-chicken-salad.webp",
+    imageAlt: "Salad bowl with herb chicken, vegetables and egg",
+  },
+  {
+    id: "wild-rocket-berry",
+    name: "Wild Rocket & Berry",
+    price: 9.9,
+    weight: "395 g",
+    kcal: "330 kcal",
+    tag: "vegan",
+    category: "snacks",
+    blobs: ["#8F3B5C", "#8FA84E", "#E3B23C", "#6F8F4E"],
+    image: "/images/dishes/wild-rocket-berry.webp",
+    imageAlt: "Rocket salad with berries, pomegranate and avocado",
+  },
+];
